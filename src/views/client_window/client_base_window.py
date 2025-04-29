@@ -3,7 +3,7 @@ from src.views.base_structures.base_frame import BaseFrame
 from src.views.base_structures.base_frame import RightFrame
 from src.views.client_window.client_create_window import ClientCreateWindow
 
-class ClienBaseWindow():
+class ClientBaseWindow():
     def __init__(self, root):
         self.root = root
         self.frame = BaseFrame(root)
@@ -15,8 +15,11 @@ class ClienBaseWindow():
         self.left_label.place(relx=0.12, rely=0.2, relwidth=0.6, relheight=0.15)
 
     def createClient(self):
-        right_frame = RightFrame(self.root)
-        self.creat_client_window = ClientCreateWindow(right_frame) 
+        self.right_frame = RightFrame(self.root)
+        self.creat_client_window = ClientCreateWindow(self.right_frame) 
+    
+    def newRightFrame(self):
+        self.new_frame = RightFrame(self.root)
 
 
     

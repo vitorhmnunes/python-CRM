@@ -1,9 +1,10 @@
 from customtkinter import *
-from src.views.base_structures.base_frame import BaseFrame
+from src.views.base_structures.base_frame import BaseFrame, UpperFrame
 
 class StartWindow():
     def __init__(self, root):
         self.frame = BaseFrame(root)
+        self.upper_frame = UpperFrame(root)
         self.leftFrameLabel(self.frame.left_corner_frame)
         self.centralFrameLabels(self.frame)
         self.centralTextEntries(self.frame)

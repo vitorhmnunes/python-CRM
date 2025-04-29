@@ -5,7 +5,7 @@ class GoBackButtonConstructor():
         self.root = root
         self.frame = frame
         self.left_frame = left_frame
-        self.button = GoBackButton(left_frame)
+        self.button = GoBackButton(self.left_frame)
         self.buttonConfigure()
 
     def buttonConfigure(self):
