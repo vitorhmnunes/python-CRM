@@ -1,5 +1,5 @@
 from src.views.base_structures.upper_menu_buttons import UpperMenuButtons
-from src.main.constructor.client_window_constructor import ClientWindowConstructor
+from src.main.constructor.client_constructors.client_window_constructor import ClientWindowConstructor
 
 class UpperMenuButtonsConstructor():
     def __init__(self, upper_frame, root, frame):
