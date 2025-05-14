@@ -1,10 +1,10 @@
 from src.views.client_window.client_base_window import ClientBaseWindow
 from src.main.constructor.base_structures.go_back_button_constructor import GoBackButtonConstructor
 from src.main.constructor.base_structures.left_crud_buttons_constructor import LeftCrudButtonsConstructor
-from src.main.constructor.client_constructors.client_create_window_constructor import ClientCreateWindowConstructor
-from src.main.constructor.client_constructors.client_read_window_constructor import ClientReadWindowConstructor
-from src.main.constructor.client_constructors.client_update_window_constructor import ClientUpdateWindowConstructor
-from src.main.constructor.client_constructors.client_delete_window_constructor import ClientDeleteWindowConstructor
+from src.main.constructor.client_window.client_create_window_constructor import ClientCreateWindowConstructor
+from src.main.constructor.client_window.client_read_window_constructor import ClientReadWindowConstructor
+from src.main.constructor.client_window.client_update_window_constructor import ClientUpdateWindowConstructor
+from src.main.constructor.client_window.client_delete_window_constructor import ClientDeleteWindowConstructor
 
 class ClientWindowConstructor():
     def __init__(self, root):
