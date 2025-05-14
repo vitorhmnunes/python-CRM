@@ -2,7 +2,7 @@ from customtkinter import *
 from src.views.base_structures.basic_components import BasicComponents
 from src.views.base_structures.alert_window import AlertWindow
 
-class ClientDeleteWindow(BasicComponents):
+class RentDeleteWindow(BasicComponents):
     def __init__(self, master):
         super().__init__(master)
         self.labels()
@@ -13,8 +13,8 @@ class ClientDeleteWindow(BasicComponents):
         
     def labels(self):
         super().labels()
-        self.txt1.configure(text='Excluir Cliente')
-        self.txt2.configure(text='CPF')
+        self.txt1.configure(text='Excluir Aluguel')
+        self.txt2.configure(text='Código')
 
     def textEntries(self):
         super().textEntries()

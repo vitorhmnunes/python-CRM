@@ -9,8 +9,7 @@ class StartWindowConstructor():
                                                           self.start_window.upper_frame, 
                                                           self.root, self.start_window.frame
                                                           )
-        self.upper_buttons.clientWindowCall()
-        self.upper_buttons.vehicleWindowCall()
+
 
 
 
