@@ -13,7 +13,7 @@
  * [Models](#Models)
  * [Controllers](#Controllers)
 
-<span style="color:#2F4F4F">## Visão Geral</span>
+<span style="color:blue">## Visão Geral</span>
 
   - Feita em python, a aplicação está estruturada com a arquitetura MVC e foi totalmente orientada a objetos.
   - Possui interface para interação com o cliente, feita com a biblioteca Custom TKinter, perpetuação dos dados por meio do banco de dados MySQL e as interações por meio dessas duas 
