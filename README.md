@@ -14,14 +14,15 @@
 
 ## Visão Geral
 
- - Feita em python, a aplicação está estruturada com a arquitetura MVC e foi totalmente orientada a objetos.
- - Possui interface para interação com o cliente, feita com a biblioteca Custom TKinter, perpetuação dos dados por meio do banco de dados MySQL e as interações por meio dessas duas partes feitas na pasta controllers.
- - Nessa aplicação é possível cadastras Clientes, Veículos e Aluguéis (interação entre clientes e veículos), alterá-los e excluí-los.
+  - Feita em python, a aplicação está estruturada com a arquitetura MVC e foi totalmente orientada a objetos.
+  - Possui interface para interação com o cliente, feita com a biblioteca Custom TKinter, perpetuação dos dados por meio do banco de dados MySQL e as interações por meio dessas duas 
+    partes feitas na pasta controllers.
+  - Nessa aplicação é possível cadastras Clientes, Veículos e Aluguéis (interação entre clientes e veículos), alterá-los e excluí-los.
 
 ## Views
 
- - Uso da biblioteca Custom TKinter.
- - O funcionamento das janelas consiste em um frame principal, Root, em que todas as demais janelas estarão sobrepostas.
+  - Uso da biblioteca Custom TKinter.
+  - O funcionamento das janelas consiste em um frame principal, Root, em que todas as demais janelas estarão sobrepostas.
 
     ### Estruturação
 
@@ -33,70 +34,70 @@
 
     ### Base Structures
 
-     #### Base Frame
+      #### Base Frame
 
-     **Base Frame**
+       **Base Frame**
 
-      - Como foi dito, o funcionamento das janelas consiste em um frame principal (Root) em que todas as demais janelas estarão sobrepostas. 
-      - Todavia, a sobreposição só pode acontecer de uma janela por vez. Assim, na transição entre uma janela e outra, se faz necessário que se exclua a primeira janela sobreposta, para 
-        que a nova janela seja sobreposta. (OBS.: Não se exclui o Root)
-      - Então, esse é o motivo da existência do frame "Base Frame", ele é o frame principal que se sobrepõe ao Root, onde todos os Widgets das demais janelas estarão inseridos. 
-      - Ao trocar de uma janela para outra, o base frame com os widgets atuais é excluído e outro base frame é gerado com os widgets da nova janela.
+       - Como foi dito, o funcionamento das janelas consiste em um frame principal (Root) em que todas as demais janelas estarão sobrepostas. 
+       - Todavia, a sobreposição só pode acontecer de uma janela por vez. Assim, na transição entre uma janela e outra, se faz necessário que se exclua a primeira janela sobreposta, 
+         para que a nova janela seja sobreposta. (OBS.: Não se exclui o Root)
+       - Então, esse é o motivo da existência do frame "Base Frame", ele é o frame principal que se sobrepõe ao Root, onde todos os Widgets das demais janelas estarão inseridos. 
+       - Ao trocar de uma janela para outra, o base frame com os widgets atuais é excluído e outro base frame é gerado com os widgets da nova janela.
 
-     **Right Frame**
+       **Right Frame**
 
-      - O Right Frame é o frame utilizado sobre o Base Frame, e ocupa a porção direita do Base Frame.
-      - Ele serve para que o menu das janelas Client, Vehicle e Rent, que fica na posição esquerda, não precise ser excluído. Assim, ao trocar de janelas, somente a porção direita do 
-        Base Frame, o Right Frame, é excluído e a porção esquerda do Base Frame (que contém o menu), se mantém.
+       - O Right Frame é o frame utilizado sobre o Base Frame, e ocupa a porção direita do Base Frame.
+       - Ele serve para que o menu das janelas Client, Vehicle e Rent, que fica na posição esquerda, não precise ser excluído. Assim, ao trocar de janelas, somente a porção direita do 
+         Base Frame, o Right Frame, é excluído e a porção esquerda do Base Frame (que contém o menu), se mantém.
 
-     **Upper Frame**
+       **Upper Frame**
 
-      - Tem a mesma funcionalidade do Base Frame.
-      - Ocupa a parte superior do Root, e tem um menu inserido nele, onde se navega entre as janelas Client, Vehicle e Rent.
-      - Assim ao transicionar entre uma janela e outra, o menu do Upper Frame se mantém e somente a parte de baixo, Base Frame, é excluído e recriado.
+       - Tem a mesma funcionalidade do Base Frame.
+       - Ocupa a parte superior do Root, e tem um menu inserido nele, onde se navega entre as janelas Client, Vehicle e Rent.
+       - Assim ao transicionar entre uma janela e outra, o menu do Upper Frame se mantém e somente a parte de baixo, Base Frame, é excluído e recriado.
     
-     #### Upper Menu Buttons
+      #### Upper Menu Buttons
 
-      - São os botões presentens no Upper Frame referentes ao menu para navegação entre as janelas Client, Vehicle Rent.
+       - São os botões presentens no Upper Frame referentes ao menu para navegação entre as janelas Client, Vehicle Rent.
 
-     #### Left Crud Buttons
+      #### Left Crud Buttons
 
-      - São os botões presentes na porção esquerda do Base Frame, serve para navegação entre as opções CRUD de cada janela (Client, Vehicle e Rent)
+       - São os botões presentes na porção esquerda do Base Frame, serve para navegação entre as opções CRUD de cada janela (Client, Vehicle e Rent)
 
-     #### Go Back Button
+      #### Go Back Button
   
-      - Botão que permite voltar para a janela inicial, Start Window
+       - Botão que permite voltar para a janela inicial, Start Window
 
-     #### Basic Components
+      #### Basic Components
 
-      - São os widgets básicos das janelas (Read, Update e Delete), de cada objeto (Client, Vehicle e Rent).
+       - São os widgets básicos das janelas (Read, Update e Delete), de cada objeto (Client, Vehicle e Rent).
 
-     #### Alert Window
+      #### Alert Window
 
-      - É a janela de alerta para confirmação de exclusão de qualquer objeto.
+       - É a janela de alerta para confirmação de exclusão de qualquer objeto.
     
-    ### Start Window
+     ### Start Window
 
-     - É a jenela inicial da aplicação.
-     - Nela é possível pesquisar por algum cliente, ou aluguel.
+      - É a jenela inicial da aplicação.
+      - Nela é possível pesquisar por algum cliente, ou aluguel.
 
-    ### Client Window
+     ### Client Window
 
-     - É a pasta referente as janelas da seção Client.
-     - Possui as jenelas CRUD refentes a Client.
+      - É a pasta referente as janelas da seção Client.
+      - Possui as jenelas CRUD refentes a Client.
 
-    ### Vehicle Window
+     ### Vehicle Window
 
-     - É a pasta referente as janelas da seção Vehicle.
-     - Possui as jenelas CRUD refentes a Vehicle.
+      - É a pasta referente as janelas da seção Vehicle.
+      - Possui as jenelas CRUD refentes a Vehicle.
 
-    ### Rent Window
+     ### Rent Window
 
-     - É a pasta referente as janelas da seção Rent.
-     - Possui as jenelas CRUD refentes a Rent.
+      - É a pasta referente as janelas da seção Rent.
+      - Possui as jenelas CRUD refentes a Rent.
     
 
-### Constructors
+## Constructors
 
   - São os construtores das views.
   - Eles que inicializam os views objects
