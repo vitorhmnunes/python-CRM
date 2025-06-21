@@ -15,7 +15,7 @@
 ## Visão Geral
 
  - Feita em python, a aplicação está estruturada com a arquitetura MVC e foi totalmente orientada a objetos.
- - Possui interface para interação com o cliente, feita com a biblioteca Custom TKinter, perpetuação dos dados por meio do banco de dados MySQL e as interções por meio dessas duas partes feitas na pasta controllers.
+ - Possui interface para interação com o cliente, feita com a biblioteca Custom TKinter, perpetuação dos dados por meio do banco de dados MySQL e as interações por meio dessas duas partes feitas na pasta controllers.
  - Nessa aplicação é possível cadastras Clientes, Veículos e Aluguéis (interação entre clientes e veículos), alterá-los e excluí-los.
 
 ## Views
@@ -38,14 +38,16 @@
      **Base Frame**
 
       - Como foi dito, o funcionamento das janelas consiste em um frame principal (Root) em que todas as demais janelas estarão sobrepostas. 
-      - Todavia, a sobreposição só pode acontecer de uma janela por vez. Assim, na transição entre uma janela e outra, se faz necessário que se exclua a primeira janela sobreposta, para que a nova janela seja sobreposta.
-      - Então, esse é o motivo da existência do frame "Base Frame", ele é o frame que se sobrepõe ao Root por completo, onde todos os Widgets das demais janelas estarão inseridos. 
+      - Todavia, a sobreposição só pode acontecer de uma janela por vez. Assim, na transição entre uma janela e outra, se faz necessário que se exclua a primeira janela sobreposta, para 
+        que a nova janela seja sobreposta. (OBS.: Não se exclui o Root)
+      - Então, esse é o motivo da existência do frame "Base Frame", ele é o frame principal que se sobrepõe ao Root, onde todos os Widgets das demais janelas estarão inseridos. 
       - Ao trocar de uma janela para outra, o base frame com os widgets atuais é excluído e outro base frame é gerado com os widgets da nova janela.
 
      **Right Frame**
 
       - O Right Frame é o frame utilizado sobre o Base Frame, e ocupa a porção direita do Base Frame.
-      - Ele serve para que o menu das janelas Client, Vehicle e Rent, que fica na posição esquerda, não precise ser excluído. Assim, ao trocar de janelas, somente a porção direita do Base Frame, o Right Frame, é excluído e a porção esquerda do Base Frame (que contém o menu), se mantém.
+      - Ele serve para que o menu das janelas Client, Vehicle e Rent, que fica na posição esquerda, não precise ser excluído. Assim, ao trocar de janelas, somente a porção direita do 
+        Base Frame, o Right Frame, é excluído e a porção esquerda do Base Frame (que contém o menu), se mantém.
 
      **Upper Frame**
 
@@ -67,13 +69,12 @@
 
      #### Basic Components
 
-      - São os componentes básicos das janelas (Read, Update e Delete), de cada objeto (Client, Vehicle e Rent).
+      - São os widgets básicos das janelas (Read, Update e Delete), de cada objeto (Client, Vehicle e Rent).
 
      #### Alert Window
 
       - É a janela de alerta para confirmação de exclusão de qualquer objeto.
     
-
     ### Start Window
 
      - É a jenela inicial da aplicação.
@@ -108,4 +109,4 @@
 
 ## Controllers
 
-  - Conecta a interação do usuário nas Views com o tratamento e perpetuação no banco de dados no Models.
+  - Conecta a interação do usuário nas Views, com o tratamento e perpetuação no banco de dados no Models.
