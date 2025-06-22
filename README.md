@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 
 
-
-
-=======
 <h1 align="Center"> Python Rental Car CRM </h1>
 
 ![Uma descrição da imagem aqui.](https://github.com/user-attachments/assets/cb3a1ae6-aea2-4fa9-b313-4ee747d26c84)
