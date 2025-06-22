@@ -118,4 +118,7 @@
 ## Controllers
 
   - Conecta a interação do usuário nas Views, com o tratamento e perpetuação no banco de dados no Models.
->>>>>>> b092850ef827a961dac77ca5d82760caf6a9be57
+
+<h4 align="center"> 
+	:construction:  Projeto em construção  :construction:
+</h4>
