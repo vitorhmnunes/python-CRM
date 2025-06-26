@@ -10,14 +10,17 @@ class MySQLConnection:
         self._username = os.getenv("USERNAME")
         self._password = os.getenv("PASSWORD")
         self._database = os.getenv("DATABASE")
-        self.conn = self._connecting()
 
     def get_database(self):
         return self._database
+    
+    def get_db_connection(self):
+        self.conn = self._connecting()
+        return self.conn
 
     def _connecting(self):
         return mysql_connector.connect(
-            user = self._user,
+            user = self._username,
             password = self._password,
             host = self._host,
             database = self._database

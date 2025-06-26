@@ -1,9 +1,4 @@
-<<<<<<< HEAD
 
-
-
-
-=======
 <h1 align="Center"> Python Rental Car CRM </h1>
 
 ![Uma descrição da imagem aqui.](https://github.com/user-attachments/assets/cb3a1ae6-aea2-4fa9-b313-4ee747d26c84)
@@ -118,4 +113,3 @@
 ## Controllers
 
   - Conecta a interação do usuário nas Views, com o tratamento e perpetuação no banco de dados no Models.
->>>>>>> b092850ef827a961dac77ca5d82760caf6a9be57
