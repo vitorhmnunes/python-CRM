@@ -47,32 +47,37 @@ class DbCRUDOperations:
         return columns, values
 
     def _get_lines_from_tables(self, table_name: str, condition_column: str, condition_value):
-        query = ' '.join(['SELECT * FROM', table_name, 'WHERE', condition_column, '=', condition_value, ';'])
-        result = self._querying(query)
-
-        if not result:
-            return False
-        else:
+        try:
+            query = ' '.join(['SELECT * FROM', table_name, 'WHERE', condition_column, '=', condition_value, ';'])
+            result = self._querying(query)
             return result
+        except: 
+            raise Exception(False)
+
         
     def _verify_condition(self, table_name: str, condition_column: str, condition_value):
-        verification = self._get_lines_from_tables(table_name, condition_column, condition_value)
-        if not verification:
-            return False
-        else:
-            return True  
+        try:
+            self._get_lines_from_tables(table_name, condition_column, condition_value)
+        except:
+            raise Exception(False)
 
 
-    def read_instance(self, table_name: str, condition_column: str, condition_value):
-        return self._get_lines_from_tables(table_name, condition_column, condition_value)
+    def read_record(self, table_name: str, condition_column: str, condition_value):
+        #verifying if condition_value exists and obtaining the data from database
+        try: 
+            self._verify_condition(table_name, condition_column, condition_value)
+            result = self._get_lines_from_tables(table_name, condition_column, condition_value)
+            return result
+        except: 
+            raise Exception(f"{condition_column} == {condition_value} doesn't exists in {table_name}")
+        
 
-
-    def create_line(self, table_name: str ,data: dict):
+    def create_record(self, table_name: str, data: dict):
         columns, values = self._returning_columns_and_values(data)
 
         #Verifying if primary_key exists 
-        if self._verify_condition(table_name, condition_column=columns[0], condition_value=values[0]) is False:
-            return f"The primary_key ({columns[0]} = {values[0]}) already exists in {table_name}"
+        try: self._verify_condition(table_name, condition_column=columns[0], condition_value=values[0])
+        except: raise Exception (f"The primary_key ({columns[0]} = {values[0]}) already exists in {table_name}")
 
         # Construct the VALUES part of the query
         value_syntax = []
@@ -85,18 +90,19 @@ class DbCRUDOperations:
             cursor = self.conn.cursor()
             cursor.execute(insertion_query, tuple(data))
             self.conn.commit()
-            print(f"Row created in {table_name}")
-            return True
+            message = (f"Row created in {table_name}")
+            return message
+        
         except mysql_connector.Error as err:
-            print(f"Error creating instance: {err}")
             self.conn.rollback()
-            return False
+            message = (f"Error creating instance: {err}")
+            raise message
 
 
-    def update_instance_by_id(self, table_name: str, condition_column: str, condition_value, update_data: dict):
+    def update_record_by_id(self, table_name: str, condition_column: str, condition_value, update_data: dict):
         #verifying if de condition_value exists
-        if self._verify_condition(table_name, condition_column, condition_value) is False:
-            return f"{condition_column} = {condition_value} doesn't exist in {table_name}"
+        try: self._verify_condition(table_name, condition_column, condition_value)
+        except: raise Exception(f"{condition_column} = {condition_value} doesn't exist in {table_name}")
         
         columns, values = self._returning_columns_and_values(update_data)
 
@@ -113,18 +119,19 @@ class DbCRUDOperations:
             cursor = self.conn.cursor()
             cursor.execute(update_query, tuple(values))
             self.conn.commit()
-            print(f"Row ({condition_column} = {condition_value}) updated in {table_name}")
-            return True
+            message = (f"Row ({condition_column} = {condition_value}) updated in {table_name}")
+            return message
+        
         except mysql_connector.Error as err:
-            print(f'Error updating data: {err}')
             self.conn.rollback()
-            return False
+            message = (f'Error updating data: {err}')
+            return message
 
 
-    def delete_instance(self, table_name: str, condition_column: str, condition_value):
+    def delete_record(self, table_name: str, condition_column: str, condition_value):
         #verifying if the condition_value exists
-        if self._verify_condition(table_name, condition_column, condition_value) is False:
-            return f"{condition_column} = {condition_value} doesn't exist in {table_name}"
+        try: self._verify_condition(table_name, condition_column, condition_value)
+        except: raise Exception(f"{condition_column} = {condition_value} doesn't exist in {table_name}")
 
         delete_query = f"DELETE FROM {table_name} WHERE {condition_column} = %s"
 
@@ -132,9 +139,10 @@ class DbCRUDOperations:
             cursor = self.conn.cursor()
             cursor.execute(delete_query, [condition_value])
             self.conn.commit()
-            print(f"Row ({condition_column} = {condition_value}) deleted in {table_name}")
-            return True
+            message = (f"Row ({condition_column} = {condition_value}) deleted in {table_name}")
+            return message
+        
         except mysql_connector.Error as err:
-            print(f'Error deleting data: {err}')
             self.conn.rollback()
-            return False      
+            message = (f'Error deleting data: {err}')
+            return message  
