@@ -9,10 +9,10 @@ class ClientCreateController():
 
     def create_db_record(self, client: Client):
         client_dict = {
-            'cpf': {client.cpf},
-            'name': {client.name},
-            'adress': {client.adress},
-            'phone_number': {client.phone_number}
+            'cpf': client.cpf,
+            'name': client.name,
+            'adress': client.adress,
+            'phone_number': client.phone_number
         }
 
         try:
