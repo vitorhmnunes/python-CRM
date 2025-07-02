@@ -40,7 +40,7 @@ class VehicleCreateWindow():
         self.year_entry = CTkEntry(self._master, fg_color='#1C1C1C', placeholder_text='0000', placeholder_text_color='#FFFFFF', font=('', 14))
         self.year_entry.place(relx=0.50, rely=0.43, relwidth=0.40, relheight=0.09)
 
-        self.model_entry = CTkEntry(self._master, fg_color='#1C1C1C', placeholder_text='0000', placeholder_text_color='#FFFFFF', font=('', 14))
+        self.model_entry = CTkEntry(self._master, fg_color='#1C1C1C', font=('', 14))
         self.model_entry.place(relx=0.24, rely=0.65, relwidth=0.5, relheight=0.09)
 
 
