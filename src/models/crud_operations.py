@@ -46,38 +46,26 @@ class DbCRUDOperations:
 
         return columns, values
 
-    def _get_lines_from_tables(self, table_name: str, condition_column: str, condition_value):
-        try:
-            query = ' '.join(['SELECT * FROM', table_name, 'WHERE', condition_column, '=', condition_value, ';'])
-            result = self._querying(query)
-            return result
-        except: 
-            raise Exception(False)
-
+    def _get_line_from_table(self, table_name: str, condition_column: str, condition_value):
+        query = ' '.join(['SELECT * FROM', table_name, 'WHERE', condition_column, '=', condition_value, ';'])
+        result = self._querying(query)
+        return result
+  
         
     def _verify_condition(self, table_name: str, condition_column: str, condition_value):
-        try:
-            self._get_lines_from_tables(table_name, condition_column, condition_value)
-        except:
-            raise Exception(False)
+        result = self._get_line_from_table(table_name, condition_column, condition_value)
+        if not result:
+            raise Exception(f"{condition_value} not found")
+
 
 
     def read_record(self, table_name: str, condition_column: str, condition_value):
-        #verifying if condition_value exists and obtaining the data from database
-        try: 
-            self._verify_condition(table_name, condition_column, condition_value)
-            result = self._get_lines_from_tables(table_name, condition_column, condition_value)
-            return result
-        except: 
-            raise Exception(f"{condition_column} == {condition_value} doesn't exists in {table_name}")
+        result = self._get_lines_from_tables(table_name, condition_column, condition_value)
+        return result
         
 
     def create_record(self, table_name: str, data: dict):
         columns, values = self._returning_columns_and_values(data)
-
-        #Verifying if primary_key exists 
-        try: self._verify_condition(table_name, condition_column=columns[0], condition_value=values[0])
-        except: raise Exception (f"The primary_key ({columns[0]} = {values[0]}) already exists in {table_name}")
 
         # Construct the VALUES part of the query
         value_syntax = []
@@ -100,10 +88,6 @@ class DbCRUDOperations:
 
 
     def update_record_by_id(self, table_name: str, condition_column: str, condition_value, update_data: dict):
-        #verifying if de condition_value exists
-        try: self._verify_condition(table_name, condition_column, condition_value)
-        except: raise Exception(f"{condition_column} = {condition_value} doesn't exist in {table_name}")
-        
         columns, values = self._returning_columns_and_values(update_data)
 
         # Construct the SET part of the query (column = %s)
@@ -129,10 +113,6 @@ class DbCRUDOperations:
 
 
     def delete_record(self, table_name: str, condition_column: str, condition_value):
-        #verifying if the condition_value exists
-        try: self._verify_condition(table_name, condition_column, condition_value)
-        except: raise Exception(f"{condition_column} = {condition_value} doesn't exist in {table_name}")
-
         delete_query = f"DELETE FROM {table_name} WHERE {condition_column} = %s"
 
         try:

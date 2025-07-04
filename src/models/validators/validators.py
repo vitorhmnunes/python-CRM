@@ -52,8 +52,8 @@ class VehicleValidators():
 
 
 
-class RentValidators():   
-    def inicial_date_validation(self, inicial_date: str, final_date: str):
+class RentValidators(): 
+    def date_validation(self, inicial_date: str, final_date: str):
         format = "%d/%m/%Y"
         try: 
             inicial_date = datetime.strptime(inicial_date, format).date()
