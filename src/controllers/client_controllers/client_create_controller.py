@@ -31,11 +31,16 @@ class ClientCreateController():
         except ValueError as err:
             raise err
        
+    def exists_cpf(self, table_name, cpf_value):
+        verification = self.db_operations.verify_condition(table_name, condition_column='cpf', condition_value=cpf_value)
+        if verification == True:
+            raise Exception(f"Cpf = {cpf_value} already exists")
 
     def creating_client(self, data: dict):
         client = Client(data['cpf'], data['name'], data['adress'], data['phone_number'])
         try:
             self.validating(client)
+            self.exists_cpf(table_name='client', cpf_value=client.cpf)
         except Exception as err:
             raise err
         else:

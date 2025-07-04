@@ -20,11 +20,17 @@ class ClientReadController():
             self.validator.cpf_validations(cpf_value)
         except ValueError as err:
             raise err
+        
+    def exists_cpf(self, table_name, cpf_value):
+        verification = self.db_operations.verify_condition(table_name, condition_column='cpf', condition_value=cpf_value)
+        if verification == False:
+            raise Exception(f"Cpf = {cpf_value} doesn't exists")
        
 
     def reading_client(self, cpf_value):
         try:
             self.validating(cpf_value)
+            self.exists_cpf(table_name='client', cpf_value=cpf_value)
         except Exception as err:
             raise err
         else:
