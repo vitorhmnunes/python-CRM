@@ -1,4 +1,6 @@
-from src.views.rent_window.rent_base_window import RentBaseWindow
+from customtkinter import *
+from src.views.base_structures.base_frame import BaseFrame
+from src.views.base_structures.base_frame import RightFrame
 from src.main.constructor.base_structures.go_back_button_constructor import GoBackButtonConstructor
 from src.main.constructor.base_structures.left_crud_buttons_constructor import LeftCrudButtonsConstructor
 from src.main.constructor.rent_window.rent_create_window_constructor import RentCreateWindowConstructor
@@ -9,33 +11,40 @@ from src.main.constructor.rent_window.rent_delete_window_constructor import Rent
 class RentWindowConstructor():
     def __init__(self, root):
         self.root = root
-        self.base_window = RentBaseWindow(self.root)
-        self.go_back_button = GoBackButtonConstructor(self.root, self.base_window.frame,
-                                                        self.base_window.frame.left_corner_frame)
+        self.frame = BaseFrame(root)
+        self.right_frame = RightFrame(self.root)
+        self.leftFrameLabel(self.frame.left_corner_frame)
+        self.create_window = RentCreateWindowConstructor(self.right_frame)
+        self.go_back_button = GoBackButtonConstructor(self.root, self.frame,
+                                                        self.frame.left_corner_frame)
         self.leftCrudButtonsCommands()
 
+    def leftFrameLabel(self, left_corner_frame):
+        self.left_label = CTkLabel(left_corner_frame, text="Aluguéis" , text_color='#2F4F4F', font=('impact', 50), justify='left' )
+        self.left_label.place(relx=0.12, rely=0.2, relwidth=0.6, relheight=0.15)
+
     def createWindowCall(self):
-        self.base_window.right_frame.place_forget()
-        self.base_window.newRightFrame()
-        self.create_window = RentCreateWindowConstructor(self.base_window.new_frame)
+        self.right_frame.place_forget()
+        self.right_frame = RightFrame(self.root)
+        self.create_window = RentCreateWindowConstructor(self.right_frame)
     
     def readWindowCall(self):
-        self.base_window.right_frame.place_forget()
-        self.base_window.newRightFrame()
-        self.read_window = RentReadWindowConstructor(self.base_window.new_frame)
+        self.right_frame.place_forget()
+        self.right_frame = RightFrame(self.root)
+        self.read_window = RentReadWindowConstructor(self.right_frame)
 
     def updateWindowCall(self):
-        self.base_window.right_frame.place_forget()
-        self.base_window.newRightFrame()
-        self.update_window = RentUpdateWindowConstructor(self.base_window.new_frame)
+        self.right_frame.place_forget()
+        self.right_frame = RightFrame(self.root)
+        self.update_window = RentUpdateWindowConstructor(self.right_frame)
 
     def deleteWindowCall(self):
-        self.base_window.right_frame.place_forget()
-        self.base_window.newRightFrame()
-        self.update_window = RentDeleteWindowConstructor(self.base_window.new_frame)
+        self.right_frame.place_forget()
+        self.right_frame = RightFrame(self.root)
+        self.update_window = RentDeleteWindowConstructor(self.right_frame)
 
     def leftCrudButtonsCommands(self):
-        self.left_buttons = LeftCrudButtonsConstructor(self.base_window.frame.left_corner_frame)
+        self.left_buttons = LeftCrudButtonsConstructor(self.frame.left_corner_frame)
         self.left_buttons.crud_buttons.create_bt.configure(command=self.createWindowCall)
         self.left_buttons.crud_buttons.read_bt.configure(command=self.readWindowCall)
         self.left_buttons.crud_buttons.update_bt.configure(command=self.updateWindowCall)
