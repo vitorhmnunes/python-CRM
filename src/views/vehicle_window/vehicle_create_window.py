@@ -45,7 +45,7 @@ class VehicleCreateWindow():
 
 
     def textBox(self):
-        self.text_box = CTkTextbox(self._master, fg_color='#272727', border_spacing=0, text_color=('#00FF00','#FF0000'), border_color='#272727', border_width=0, state='disabled')
+        self.text_box = CTkTextbox(self._master, fg_color='#272727', border_spacing=0, border_color='#272727', border_width=0, state='disabled')
         self.text_box.place(relx=0.4, rely=0.01, relwidth=0.6, relheight=0.13) 
 
     def submitButton(self):

@@ -26,13 +26,9 @@ class ClientUpdateWindow(BasicComponents):
     def textBox(self):
         super().textBox()
 
-    def infosWindowCall(self):
-        self.update_infos = UpdateInfosToplevelWindow()
-
     def confirmButton(self):
         super().confirmButton()
         self.confirm_bt.configure(text='ALTERAR')
-        self.confirm_bt.configure(command=self.infosWindowCall)
 
     
 #Window to insert the new client informations
@@ -45,6 +41,7 @@ class UpdateInfosToplevelWindow(CTkToplevel):
         self.labels()
         self.textEntries()
         self.submitButton()
+        self.textBox()
   
     def labels(self):
         self.txt1 = CTkLabel(self, text='Alterar Cliente', text_color='#808080', font=('', 18), justify='left')
@@ -68,10 +65,10 @@ class UpdateInfosToplevelWindow(CTkToplevel):
   
         self.phone_entry = CTkEntry(self, fg_color='#1C1C1C', placeholder_text='(00) 00000-0000', placeholder_text_color='#FFFFFF', font=('', 14))
         self.phone_entry.place(relx=0.15, rely=0.61, relwidth=0.7, relheight=0.09)
-      
 
     def textBox(self):
-        pass #caso precise emitir alguma mensagem, posicionar no canto inferior direito, da mesma cor da  __master e sem borda
+        self.text_box = CTkTextbox(self, fg_color='#272727', border_spacing=0, border_color='#272727', border_width=0, state="disabled")
+        self.text_box.place(relx=0.4, rely=0.01, relwidth=0.6, relheight=0.13) 
 
     def submitButton(self):
         self.update_submit_button = CTkButton(self,corner_radius=100, text='ALTERAR', font=('',14), fg_color='#1C1C1C', text_color='#FFFFFF', border_width=1.4, border_color='#696969')

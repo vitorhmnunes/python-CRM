@@ -38,9 +38,9 @@ class ClientCreateWindow():
         self.fone_entry.place(relx=0.08, rely=0.71, relwidth=0.7, relheight=0.09)
 
     def textBox(self):
-        self.text_box = CTkTextbox(self._master, fg_color='#272727', border_spacing=0, text_color=('#00FF00','#FF0000'), border_color='#272727', border_width=0, state='disabled')
+        self.text_box = CTkTextbox(self._master, fg_color='#272727', border_spacing=0, border_color='#272727', border_width=0, state="disabled")
         self.text_box.place(relx=0.4, rely=0.01, relwidth=0.6, relheight=0.13) 
 
     def submitButton(self):
-        self.client_submit_button = CTkButton(self._master,corner_radius=100, text='ADICIONAR', font=('',14), fg_color='#1C1C1C', text_color='#FFFFFF', border_width=1.4, border_color='#696969')
+        self.client_submit_button = CTkButton(self._master, corner_radius=100, text='ADICIONAR', font=('',14), fg_color='#1C1C1C', text_color='#FFFFFF', border_width=1.4, border_color='#696969')
         self.client_submit_button.place(relx=0.37, rely=0.85, relwidth=0.2, relheight=0.09)

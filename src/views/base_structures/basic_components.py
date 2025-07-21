@@ -36,7 +36,7 @@ class BasicComponents(ABC):
         return self.tb
 
     def confirmButton(self):
-        self.confirm_bt = CTkButton(self._master, corner_radius=100, font=('',14), fg_color='#1C1C1C', text_color='#FFFFFF', border_width=1.4, border_color='#696969')
+        self.confirm_bt = CTkButton(self._master, corner_radius=100, font=('',14), fg_color='#1C1C1C', text_color='#FFFFFF', border_width=1.4, border_color='#696969', state='disabled')
         self.confirm_bt.place(relx=0.4, rely=0.8, relwidth=0.2, relheight=0.09)
 
         return self.confirm_bt

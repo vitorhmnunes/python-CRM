@@ -1,6 +1,5 @@
 from customtkinter import *
 from src.views.base_structures.basic_components import BasicComponents
-from src.views.base_structures.alert_window import AlertWindow
 
 class RentDeleteWindow(BasicComponents):
     def __init__(self, master):
@@ -24,10 +23,7 @@ class RentDeleteWindow(BasicComponents):
     
     def textBox(self):
         super().textBox()
-
-    def alertWindowCall(self):
-        self.alert_window = AlertWindow()
     
     def confirmButton(self):
         super().confirmButton()
-        self.confirm_bt.configure(text='EXCLUIR', command=self.alertWindowCall)  
+        self.confirm_bt.configure(text='EXCLUIR')  
