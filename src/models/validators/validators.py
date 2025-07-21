@@ -1,5 +1,6 @@
 import re
 from datetime import datetime, date
+from src.models.crud_operations import DbCRUDOperations
 
 def isNull(attribute_list):
     for attr in attribute_list:
@@ -47,13 +48,17 @@ class VehicleValidators():
             raise ValueError ("Year error. Expected format (0000)")
         elif not year.isnumeric():
             raise ValueError("Year error. Must be numeric")
-        elif year > (date.today().year + 1):
+        elif int(year) > (date.today().year + 1):
             raise ValueError(f"Year error. Must be lower than {(date.today().year + 1)}")
 
 
 
-class RentValidators(): 
-    def date_validation(self, inicial_date: str, final_date: str):
+class RentValidators():
+
+    def __init__(self):
+        self.op = DbCRUDOperations()
+
+    def date_syntax_validation(self, inicial_date: str, final_date: str):
         format = "%d/%m/%Y"
         try: 
             inicial_date = datetime.strptime(inicial_date, format).date()
@@ -65,6 +70,56 @@ class RentValidators():
             raise ValueError("Date error. Inicial date greater than final date.")
         elif inicial_date == final_date:
             raise ValueError("Date error. Inicial date equal to final date.")
+        
+    def rent_code_validation(self, code):
+        try: 
+            int(code)
+        except: 
+            raise ValueError("Code error. Must be numeric")
+
+    def exists_rent_code(self, code):
+        verification = self.op.verify_condition('rent', 'code', code)
+        if verification == False:
+            raise Exception(f"Rent code doesn't exist")
+    
+    def exists_cpf(self, cpf):
+        verification = self.op.verify_condition('client', condition_column='cpf', condition_value=cpf)
+        if verification == False:
+            raise Exception(f"Cpf = {cpf} doesn't exist")
+
+    def exists_vehicle_code(self, code):
+        verification = self.op.verify_condition('vehicle', condition_column='code', condition_value=code)
+        if verification == False:
+            raise Exception(f"Code = {code} doesn't exist")
+
+    def inicial_date_validation(self, vehicle_code, inicial_date:date):
+        query = f'SELECT * FROM rent WHERE vehicle_code = "{vehicle_code}" AND inicial_date = "{inicial_date}";'
+        result = self.op.querying(query)
+        if result:
+            raise Exception(f"Error. Inicial date {inicial_date} invalid")
+
+        query = f'SELECT * FROM rent WHERE vehicle_code = "{vehicle_code}" AND inicial_date < "{inicial_date}" AND final_date > "{inicial_date}";'
+        result = self.op.querying(query)
+        if result:
+            raise Exception(f"Error. Inicial date {inicial_date} invalid")
+
+    def final_date_validation(self, vehicle_code, final_date: date):
+        query = f'SELECT * FROM rent WHERE vehicle_code = "{vehicle_code}" AND final_date = "{final_date}";'
+        result = self.op.querying(query)
+        if result:
+            raise Exception(f"Error. Final date {final_date} invalid")
+        
+        query = f'SELECT * FROM rent WHERE vehicle_code = "{vehicle_code}" AND inicial_date < "{final_date}" AND final_date > "{final_date}";'
+        result = self.op.querying(query)
+        if result:
+            raise Exception(f"Error. Final date {final_date} invalid")
+        
+    def rental_period_validation(self, vehicle_code, inicial_date:date, final_date:date):
+        query = f'SELECT * FROM rent WHERE vehicle_code = "{vehicle_code}" AND inicial_date > "{inicial_date}" AND final_date < "{final_date}";'
+        result = self.op.querying(query)
+        if result:
+            raise Exception(f"Error. Rental period invalid")
+        
 
         
         

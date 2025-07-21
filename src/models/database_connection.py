@@ -25,10 +25,15 @@ class MySQLConnection:
             host = self._host,
             database = self._database
         )
+
+    def closing(self):
+        if self.conn.is_connected():
+            self.conn.close()
+            print('Connection closed')
     
 
-    
-    
+
+
 
 # try:
 #     db = MySQLDatabase()

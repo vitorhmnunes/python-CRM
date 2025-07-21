@@ -6,7 +6,7 @@ class DbCRUDOperations:
         self.connection = MySQLConnection()
         self.conn = self.connection.get_db_connection()
 
-    def _querying(self, query: str):
+    def querying(self, query: str):
         if (not self.conn.is_connected()) or self.connection is None:
             self.conn = self.connection.get_db_connection()
         
@@ -16,10 +16,6 @@ class DbCRUDOperations:
         cursor.close()
 
         return result
-    
-    def closing(self):
-        if self.conn.is_connected():
-            self.conn.close()
     
     '''
     ----- Functions for verifying if the table exists
@@ -47,20 +43,20 @@ class DbCRUDOperations:
         return columns, values
 
     def _get_line_from_table(self, table_name: str, condition_column: str, condition_value):
-        query = ' '.join(['SELECT * FROM', table_name, 'WHERE', condition_column, '=', condition_value, ';'])
-        result = self._querying(query)
+        query = f'SELECT * FROM {table_name} WHERE {condition_column} = "{condition_value}";'
+        result = self.querying(query)
         return result
-  
         
-    def _verify_condition(self, table_name: str, condition_column: str, condition_value):
+    def verify_condition(self, table_name: str, condition_column: str, condition_value):
         result = self._get_line_from_table(table_name, condition_column, condition_value)
         if not result:
-            raise Exception(f"{condition_value} not found")
-
-
+            return False
+        else:
+            return True
+        
 
     def read_record(self, table_name: str, condition_column: str, condition_value):
-        result = self._get_lines_from_tables(table_name, condition_column, condition_value)
+        result = self._get_line_from_table(table_name, condition_column, condition_value)
         return result
         
 
@@ -76,9 +72,9 @@ class DbCRUDOperations:
 
         try:
             cursor = self.conn.cursor()
-            cursor.execute(insertion_query, tuple(data))
+            cursor.execute(insertion_query, tuple(values))
             self.conn.commit()
-            message = (f"Row created in {table_name}")
+            message = (f"New {table_name} created successfully")
             return message
         
         except mysql_connector.Error as err:
@@ -87,7 +83,7 @@ class DbCRUDOperations:
             raise message
 
 
-    def update_record_by_id(self, table_name: str, condition_column: str, condition_value, update_data: dict):
+    def update_record(self, table_name: str, condition_column: str, condition_value, update_data: dict):
         columns, values = self._returning_columns_and_values(update_data)
 
         # Construct the SET part of the query (column = %s)
@@ -103,7 +99,7 @@ class DbCRUDOperations:
             cursor = self.conn.cursor()
             cursor.execute(update_query, tuple(values))
             self.conn.commit()
-            message = (f"Row ({condition_column} = {condition_value}) updated in {table_name}")
+            message = (f"{table_name} ({condition_column} = {condition_value}) updated successfully ")
             return message
         
         except mysql_connector.Error as err:
@@ -119,7 +115,7 @@ class DbCRUDOperations:
             cursor = self.conn.cursor()
             cursor.execute(delete_query, [condition_value])
             self.conn.commit()
-            message = (f"Row ({condition_column} = {condition_value}) deleted in {table_name}")
+            message = (f"{table_name} ({condition_column} = {condition_value}) deleted successfully")
             return message
         
         except mysql_connector.Error as err:
