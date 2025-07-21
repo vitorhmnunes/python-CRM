@@ -2,14 +2,13 @@ from src.models.entities.vehicle import Vehicle
 from src.models.crud_operations import DbCRUDOperations
 from src.models.validators.validators import VehicleValidators, isNull
 
-class VehicleCreateController():
+class VehicleUpdateController():
     def __init__(self):
         self.db_operations = DbCRUDOperations()
         self.validator = VehicleValidators()
 
-    def create_db_record(self, vehicle: Vehicle):
+    def update_db_record(self, vehicle: Vehicle):
         vehicle_dict = {
-            'code': vehicle.code,
             'category': vehicle.category,
             'fuel': vehicle.fuel,
             'year': vehicle.year,
@@ -17,27 +16,25 @@ class VehicleCreateController():
         }
 
         try:
-            message = self.db_operations.create_record(table_name='vehicle', data= vehicle_dict)
+            message = self.db_operations.update_record(table_name='vehicle', condition_column='code', condition_value=vehicle.code, update_data=vehicle_dict)
             return message
         except Exception as err:
-            raise err
-            
+            raise err         
 
     def validating(self, vehicle: Vehicle):
         try :
-            isNull([vehicle.code, vehicle.category, vehicle.fuel, vehicle.year, vehicle.model])
-            self.validator.code_validation(vehicle.code)
+            isNull([vehicle.category, vehicle.fuel, vehicle.year, vehicle.model])
             self.validator.year_validation(vehicle.year)
         except ValueError as err:
             raise err
-       
+        
     def exists_code(self, table_name, code_value):
         verification = self.db_operations.verify_condition(table_name, condition_column='code', condition_value=code_value)
-        if verification == True:
-            raise Exception(f"Code = {code_value} already exist")
+        if verification == False:
+            raise Exception(f"Code = {code_value} doesn't exist")
 
 
-    def creating_vehicle(self, data: dict):
+    def updating_vehicle(self, data: dict):
         vehicle = Vehicle(data['code'], data['category'], data['fuel'], data['year'], data['model'])
         try:
             self.validating(vehicle)
@@ -46,7 +43,7 @@ class VehicleCreateController():
             raise err
         else:
             try: 
-                message = self.create_db_record(vehicle)
+                message = self.update_db_record(vehicle)
                 return message
             except Exception as err:
                 raise err

@@ -24,7 +24,7 @@ class ClientDeleteController():
     def exists_cpf(self, table_name, cpf_value):
         verification = self.db_operations.verify_condition(table_name, condition_column='cpf', condition_value=cpf_value)
         if verification == False:
-            raise Exception(f"Cpf = {cpf_value} doesn't exists")
+            raise Exception(f"Cpf = {cpf_value} doesn't exist")
 
     def deleting_client(self, cpf_value):
         try:

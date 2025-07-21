@@ -34,7 +34,7 @@ class ClientCreateController():
     def exists_cpf(self, table_name, cpf_value):
         verification = self.db_operations.verify_condition(table_name, condition_column='cpf', condition_value=cpf_value)
         if verification == True:
-            raise Exception(f"Cpf = {cpf_value} already exists")
+            raise Exception(f"Cpf = {cpf_value} already exist")
 
     def creating_client(self, data: dict):
         client = Client(data['cpf'], data['name'], data['adress'], data['phone_number'])
@@ -45,7 +45,8 @@ class ClientCreateController():
             raise err
         else:
             try: 
-                self.create_db_record(client)
+                message = self.create_db_record(client)
+                return message
             except Exception as err:
                 raise err
             
