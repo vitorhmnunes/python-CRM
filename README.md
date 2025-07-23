@@ -17,7 +17,7 @@
 
   - Feita em python, a aplicação está estruturada com a arquitetura MVC e foi totalmente orientada a objetos.
   - Possui interface para interação com o cliente, feita com a biblioteca Custom TKinter, perpetuação dos dados por meio do banco de dados MySQL e as interações por meio dessas duas 
-    partes feitas na pasta controllers.
+    partes feitas na pasta controllers e constructors.
   - Nessa aplicação é possível cadastras Clientes, Veículos e Aluguéis (interação entre clientes e veículos), alterá-los e excluí-los.
 
 ## Views
@@ -59,7 +59,7 @@
     
       #### Upper Menu Buttons
 
-       - São os botões presentens no Upper Frame referentes ao menu para navegação entre as janelas Client, Vehicle Rent.
+       - São os botões presentens no Upper Frame referentes ao menu para navegação entre as janelas Client, Vehicle e Rent.
 
       #### Left Crud Buttons
 
@@ -79,7 +79,7 @@
     
      ### Start Window
 
-      - É a jenela inicial da aplicação.
+      - É a janela inicial da aplicação.
       - Nela é possível pesquisar por algum cliente, ou aluguel.
 
      ### Client Window
@@ -101,7 +101,7 @@
 ## Constructors
 
   - São os construtores das views.
-  - Eles que inicializam os views objects
+  - Eles que inicializam os views objects e conectam as views aos controllers
 
 ## Models
 
@@ -111,8 +111,5 @@
 
 ## Controllers
 
-  - Conecta a interação do usuário nas Views, com o tratamento e perpetuação no banco de dados no Models.
+  - Os controllers são responsáveis pela criação dos objetos utilizando as entities do models, pela validação dos dados dos objetos com os validators e pelas queries utilizando crud operations.
 
-<h4 align="center"> 
-	:construction:  Projeto em construção  :construction:
-</h4>
