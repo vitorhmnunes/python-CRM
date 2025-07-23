@@ -52,5 +52,5 @@ class StartWindow():
         self.client_tb = CTkTextbox(right_frame, corner_radius=5, fg_color='#1C1C1C', text_color='#FFFFFF', scrollbar_button_color='#FFFFFF', scrollbar_button_hover_color='#FFFFFF', font=('', 12), state='disabled', border_width=2 )
         self.client_tb.place(relx=0.36, rely=0.28, relwidth=0.6, relheight=0.2)
 
-        self.vehicle_tb = CTkTextbox(right_frame, corner_radius=5, fg_color='#1C1C1C', text_color='#FFFFFF', scrollbar_button_color='#FFFFFF', scrollbar_button_hover_color='#FFFFFF', font=('', 12), state='disabled', border_width=2 )
-        self.vehicle_tb.place(relx=0.36, rely=0.66, relwidth=0.6, relheight=0.26)
+        self.rent_tb = CTkTextbox(right_frame, corner_radius=5, fg_color='#1C1C1C', text_color='#FFFFFF', scrollbar_button_color='#FFFFFF', scrollbar_button_hover_color='#FFFFFF', font=('', 12), state='disabled', border_width=2 )
+        self.rent_tb.place(relx=0.36, rely=0.66, relwidth=0.6, relheight=0.26)
